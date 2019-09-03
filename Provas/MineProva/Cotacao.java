@@ -3,7 +3,7 @@ package Provas.MineProva;
 import java.util.Random;
 
 public class Cotacao {
-    // Atributos
+    // Atributos //
     private int Id;
 	private Produto Produto;
 	private int Qtd_Produtos;

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Fornecedor {
-    // Atributos
+    // Atributos //
     private int Id;
     private String Nome;
     private Produto[] Produtos;

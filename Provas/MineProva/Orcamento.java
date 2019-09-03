@@ -3,7 +3,7 @@ package Provas.MineProva;
 import java.util.Arrays;
 
 public class Orcamento {
-    // Atributos
+    // Atributos //
     private String Nome_Obra;
 	private String Descricao_Reforma;
 	private Cotacao Lista_Cotacoes[];

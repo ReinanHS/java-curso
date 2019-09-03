@@ -62,7 +62,7 @@ public class TesteFuncionamento {
         System.out.println(Arrays.toString(orcamento.BuscarCotacaoPorFornecedor(telhaNorte)));
         System.out.println(orcamento.ObterCotacaoMenorValor());
 
-        System.out.println("\n");
+        System.out.println("\n"); // Teste
 
         System.out.println(orcamento.ListarCotacaoes(20.00, 30.00));
     }
