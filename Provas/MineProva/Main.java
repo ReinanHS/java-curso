@@ -1,6 +1,9 @@
 package Provas.MineProva;
 
 import javax.swing.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
     /*
@@ -9,127 +12,401 @@ public class Main {
         DATA: 31/08/2019
     	ALUNO: Reinan Gabriel Dos Santos Souza
     */
+    private static final int LIMIT_DADOS = 50;
+
+    public static Produto produtos[] = new Produto[LIMIT_DADOS];
+    public static int produtosIndex = 0;
+
+    public static Fornecedor fornecedors[] = new Fornecedor[LIMIT_DADOS];
+    public static int fornecedoresIndex = 0;
+
+    public static Cotacao cotacaos[] = new Cotacao[LIMIT_DADOS];
+    public static int cotacaoesIndex = 0;
+
+    public static Orcamento orcamentos[] = new Orcamento[LIMIT_DADOS];
+    public static int orcamentosIndex = 0;
 
     public static void main(String[] args) {
-        Produto Cimento = new Produto("Cimento", "Cimento para uso geral", 21.90, "kgs");
-        Produto Cimento2 = new Produto("Cimento Top", "Cimento para uso geral", 25.00, "kgs");
-        Produto Cimento3 = new Produto("Cimento Agora vai", "Cimento para uso geral", 21.99, "kgs");
-
-        Produto Vedacit = new Produto("Vedacit", "Vedacit  para uso geral", 3.90, "litros");
-        Produto Vedacit2 = new Produto("Vedacit Sol", "Vedacit  para uso geral", 3.95, "litros");
-        Produto Vedacit3 = new Produto("Vedacit Brasil", "Vedacit  para uso geral", 3.75, "litros");
-
-        Produto Espuma = new Produto("Espuma", "Espuma para uso geral", 15.50, "ml");
-        Produto Espuma2 = new Produto("Espuma Do Bar", "Espuma para uso geral", 17.25, "ml");
-
-        Produto Telha = new Produto("Telha", "Telha para uso geral", 58.00, "mm");
-
-        Fornecedor telhaNorte = new Fornecedor("Telha Norte");
-        telhaNorte.CadastrarProduto(Cimento);
-        telhaNorte.CadastrarProduto(Vedacit);
-        telhaNorte.CadastrarProduto(Telha);
-
-        Fornecedor casaBoa = new Fornecedor("Casa boa");
-        casaBoa.CadastrarProduto(Vedacit);
-        casaBoa.CadastrarProduto(Vedacit2);
-        casaBoa.CadastrarProduto(Cimento2);
-        casaBoa.CadastrarProduto(Telha);
-
-        Fornecedor minhaCaca = new Fornecedor("Minha Casa");
-        minhaCaca.CadastrarProduto(Espuma2);
-        minhaCaca.CadastrarProduto(Vedacit3);
-        minhaCaca.CadastrarProduto(Cimento3);
-        minhaCaca.CadastrarProduto(Telha);
-
-        Cotacao cotacao1 = new Cotacao(Cimento, 28, "30/08/2019", "Reinan", telhaNorte, (Cimento.getValorUnitario() * 28) );
-        Cotacao cotacao2 = new Cotacao(Vedacit, 14, "30/08/2019", "Gabriel", casaBoa, ( Vedacit.getValorUnitario() * 14) );
-        Cotacao cotacao3 = new Cotacao(Cimento3, 28, "30/08/2019", "Lucas", minhaCaca, (Cimento3.getValorUnitario() * 28));
-        Cotacao cotacao4 = new Cotacao(Vedacit3, 28, "30/08/2019", "Bruno", minhaCaca, (Vedacit3.getValorUnitario() * 28));
-        Cotacao cotacao5 = new Cotacao(Telha, 28, "30/08/2019", "Maria", minhaCaca, (Telha.getValorUnitario() * 28));
-        Cotacao cotacao6 = new Cotacao(Cimento2, 28, "30/08/2019", "Davi", casaBoa, (Cimento2.getValorUnitario() * 28));
-        Cotacao cotacao7 = new Cotacao(Cimento3, 28, "30/08/2019", "Luiz", casaBoa, (Cimento3.getValorUnitario() * 28));
-
-        Orcamento orcamento = new Orcamento("Minha Casa", "Vai ser uma boa casa");
-        orcamento.CadastrarCotacao(cotacao1);
-        orcamento.CadastrarCotacao(cotacao2);
-        orcamento.CadastrarCotacao(cotacao3);
-        orcamento.CadastrarCotacao(cotacao4);
-        orcamento.CadastrarCotacao(cotacao5);
-        orcamento.CadastrarCotacao(cotacao6);
-        orcamento.CadastrarCotacao(cotacao7);
-
         int flag = 0;
 
         do{
 
-            String mgs = "";
-            mgs += "1 - Obter Cotação de Menor Valor\n";
-            mgs += "2 - Buscar Cotação Por Fornecedor\n";
-            mgs += "3 - Listar Cotaçãoes\n";
-            mgs += "4 - Sair\n";
+            String mgs = "Sistema de Orçamentos\n";
+            mgs += "IFS - Prova de POO\n\n";
 
-            flag = Integer.parseInt(JOptionPane.showInputDialog(mgs));
+            mgs += "01 - Lista Produtos Cadastrados\n";
+            mgs += "02 - Lista Fornecedores Cadastrados\n";
+            mgs += "03 - Lista Cotações Cadastrados\n";
+            mgs += "04 - Lista Orçamentos Cadastrados\n\n";
+            mgs += "05 - Cadastrar Produtos\n";
+            mgs += "06 - Cadastrar Fornecedores\n";
+            mgs += "07 - Cadastrar Cotações\n";
+            mgs += "08 - Cadastrar Orçamentos\n";
 
-            switch (flag){
-                case 1:{
+            mgs += "19 - Opções avançadas relacionadas ao orçamento\n\n";
 
-                    Cotacao menor = orcamento.ObterCotacaoMenorValor();
+            mgs += "10 - Sair\n\n";
 
-                    mgs = "";
-                    mgs += "ID: "+menor.getId()+"\n";
-                    mgs += "Fornecedor: "+menor.getFornecedor().getNome()+"\n";
-                    mgs += "Produto: "+menor.getProduto().getNome()+"\n";
-                    mgs += "Valor Cotação: "+String.format("%.2f",menor.getValorCotacao())+"\n";
-                    mgs += "Qtd Produtos: "+menor.getQtdProdutos()+"\n\n";
+            try{
+                flag = Integer.parseInt(JOptionPane.showInputDialog(mgs));
 
-                    JOptionPane.showMessageDialog(null, mgs);
-                    break;
+                switch (flag){
+                    case 1: {
+                        JOptionPane.showMessageDialog(null, listaProdutosCadastrados());
+                        break;
+                    }
+                    case 2: {
+                        JOptionPane.showMessageDialog(null, listaFornecedoresCadastrados());
+                        break;
+                    }
+                    case 3:{
+                        JOptionPane.showMessageDialog(null, listaCotacaoCadastradas());
+                        break;
+                    }
+                    case 4:{
+                        JOptionPane.showMessageDialog(null, listaOrcamentosCadastradas());
+                        break;
+                    }
+                    case 5: {
+                        if(!cadastrarProduto()){
+                            JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar o Produto");
+                        }
+                        break;
+                    }
+                    case 6: {
+                        if(!cadastrarFornecedor()){
+                            JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar o Fornecedor");
+                        }
+                        break;
+                    }
+                    case 7: {
+                        if(!cadastrarCotacao()){
+                            JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar a Cotação");
+                        }
+                        break;
+                    }
+                    case 8: {
+                        if(!cadastrarOrcamento()){
+                            JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar o Orçacamento");
+                        }
+                        break;
+                    }
+                    case 9: {
+                        String mgsOrcamento = "Opções avançadas para orçamento\n\n";
+
+                        mgsOrcamento += "01"
+
+                        break;
+                    }
+                    case 10: {
+                        JOptionPane.showMessageDialog(null, "Você ira fechar o programa");
+                        break;
+                    }
+                    default:{
+                        JOptionPane.showMessageDialog(null, "Você digitou um valor inválido por favor digite novamente!");
+                    }
                 }
-                case 2:{
-                    int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o ID do Fornecedor: \n"));
-                    boolean achou = false;
-                    mgs = "";
 
-                    for (int i = 0; i < orcamento.getListaCotacoes().length ; i++) {
-                        if(orcamento.getListaCotacoes()[i].getFornecedor().getId() == id){
+            }catch (NumberFormatException ex){
+                flag = 0;
+                JOptionPane.showMessageDialog(null, "Você digitou um valor inválido por favor digite novamente!");
+            }
 
+        }while (flag != 10);
+    }
 
-                            mgs += "Nome Solicitante: "+orcamento.getListaCotacoes()[i].getNome_Solicitante()+"\n";
-                            mgs += "Fornecedor: "+orcamento.getListaCotacoes()[i].getFornecedor().getNome()+"\n";
-                            mgs += "Produto: "+orcamento.getListaCotacoes()[i].getProduto().getNome()+"\n";
-                            mgs += "Valor Cotação: "+String.format("%.2f", orcamento.getListaCotacoes()[i].getValorCotacao())+"\n";
-                            mgs += "Qtd Produtos: "+orcamento.getListaCotacoes()[i].getQtdProdutos()+"\n\n";
+    public static boolean cadastrarProduto(){
 
-                            achou = true;
+        try {
+            int Id = Integer.parseInt(JOptionPane.showInputDialog("Atenção você só poderá fechar essa tela ao completar o registro!\n\n Digite um ID para o produto: "));
+
+            String Nome = JOptionPane.showInputDialog("ID: "+Id+"\nDigite um nome para o produto: ");
+            Nome = Nome.length() > 0 ? Nome : "Não foi informado";
+
+            String Descricao = JOptionPane.showInputDialog("ID: "+Id+"\nNome: "+Nome+"\nDigite uma descrição para o produto: ");
+            Descricao = Descricao.length() > 0 ? Descricao : "Não foi informado";
+
+            Double ValorUnitario = Double.parseDouble(JOptionPane.showInputDialog("ID: "+Id+"\nNome: "+Nome+"\nDescrição: "+Descricao+"\nDigite o valor do produto: "));
+
+            String UnidadeMedida = JOptionPane.showInputDialog("ID: "+Id+"\nNome: "+Nome+"\nDescrição: "+Descricao+"\nValor: R$"+String.format("%.2f",ValorUnitario)+"\nDigite a unidade de medida para o produto: ");
+            UnidadeMedida = UnidadeMedida.length() > 0 ? UnidadeMedida : "UND";
+
+            if(produtosIndex < 50){
+
+                Produto meuProduto = new Produto(Id, Nome, Descricao, ValorUnitario, UnidadeMedida);
+
+                produtos[produtosIndex] = meuProduto;
+
+                JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso no index "+produtosIndex);
+
+                produtosIndex++;
+
+                return true;
+            }else return false;
+
+        }catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Você digitou uma String no lugar de um número ou\n tentou fechar o programa sem completar o registro por favor tente novamente!");
+            return cadastrarProduto();
+        }
+    }
+
+    public static String listaProdutosCadastrados(){
+        if(produtosIndex > 0){
+
+            String listaDeProdutos = "Listagem de Todos os Produtos Cadastrados\n\n";
+
+            for (int i = 0; i < produtosIndex; i++) {
+                listaDeProdutos += "Nome Do Produto: "+produtos[i].getNome()+"   Valor: "+String.format("%.2f", produtos[i].getValorUnitario())+"   ID: "+produtos[i].getId()+"\n";
+            }
+
+            return listaDeProdutos;
+        }else return "No momento nenhum produto foi cadastrado";
+    }
+
+    public static boolean cadastrarFornecedor(){
+        if(produtosIndex > 0){
+            try {
+                int Id = Integer.parseInt(JOptionPane.showInputDialog("Atenção você só poderá fechar essa tela ao completar o registro!\n\n Digite um ID para o Fornecedor: "));
+
+                String Nome = JOptionPane.showInputDialog("ID: "+Id+"\nDigite um nome para o fornecedor: ");
+                Nome = Nome.length() > 0 ? Nome : "Não foi informado";
+
+                Fornecedor meuFornecedor = new Fornecedor(Id, Nome);
+
+                int qtdProdutos = Integer.parseInt(JOptionPane.showInputDialog("ID: "+Id+"\nO menor valor será  1 é o maior valor "+produtosIndex+"\nDigite a quantidade de produtos que você deseja cadastrar: "));
+
+                if(qtdProdutos > 0 && qtdProdutos <= produtosIndex){
+
+                    boolean cadastrouPeloProduto = false;
+                    int ultimoId = 0;
+
+                    String mgsListaDeProdutos = "Lista De Todos os produtos oferecidos: \n\n";
+
+                    for (int j = 0; j < produtosIndex; j++) {
+                        mgsListaDeProdutos += "Nome Do Produto: "+produtos[j].getNome()+"   ID: "+produtos[j].getId()+"\n";
+                    }
+
+                    mgsListaDeProdutos += "\n\nDigite aqui o Id do produto que você deseja cadastrar no fornecedor "+Nome+":";
+
+                    for (int i = 0; i < qtdProdutos; i++) {
+                        int idProduto = Integer.parseInt(JOptionPane.showInputDialog(mgsListaDeProdutos));
+                        boolean achouProdutoPeloId = false;
+                        for (int j = 0; j < qtdProdutos; j++) {
+                            if(produtos[i].getId() == idProduto){
+                                achouProdutoPeloId = true;
+                                if(meuFornecedor.CadastrarProduto(produtos[i])){
+                                    JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso");
+                                    cadastrouPeloProduto = true;
+                                    ultimoId = idProduto;
+                                }else if(produtos[i].getId() != ultimoId) JOptionPane.showMessageDialog(null, "Produto já cadastrado");
+                            }
+                        }
+
+                        if(!achouProdutoPeloId){
+                            JOptionPane.showMessageDialog(null, "Produto não encontrado pelo Id que você digitou.\nTalvez você não tenha cadastrado esse produto\n");
                         }
                     }
 
-                    if(!achou){
-                        JOptionPane.showMessageDialog(null, "Id não registrado!");
-                    }else{
-                        JOptionPane.showMessageDialog(null, mgs);
+                    if(cadastrouPeloProduto){
+                        if(fornecedoresIndex < 50){
+                            fornecedors[fornecedoresIndex] = meuFornecedor;
+
+                            JOptionPane.showMessageDialog(null, "Fornecedor cadastrado com sucesso no index "+fornecedoresIndex);
+
+                            fornecedoresIndex++;
+                            return true;
+                        }else return false;
                     }
 
-                    break;
-                }
-                case 3: {
+                    JOptionPane.showMessageDialog(null, "Você não cadastrou nenhum produto então terá que fazer todo o procedimento novamente");
+                    return cadastrarFornecedor();
 
-                    //Double menor = Double.parseDouble(JOptionPane.showInputDialog("Digite o menor valor: \n"));
-                    //Double maior = Double.parseDouble(JOptionPane.showInputDialog("Digite o maior valor: \n"));
+                }else{
+                    JOptionPane.showMessageDialog(null, "Você digitou valores inválidos para a quantidade de produtos por favor tente novamente!");
+                    return cadastrarFornecedor();
+                }
 
-                    JOptionPane.showMessageDialog(null, orcamento.ListarCotacaoes());
-                    break;
-                }
-                case 4: {
-                    JOptionPane.showMessageDialog(null, "Fim.");
-                    break;
-                }
-                default:{
-                    JOptionPane.showMessageDialog(null, "Valor inválido");
-                    break;
-                }
+            }catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "Você digitou uma String no lugar de um número ou\n tentou fechar o programa sem completar o registro por favor tente novamente!");
+                return cadastrarFornecedor();
+            }
+        }else{
+
+            JOptionPane.showMessageDialog(null, "Você não pode cadastrar um Fornecedor agora porque nenhum produto foi cadastrado no momento");
+
+            return false;
+        }
+    }
+
+    public static String listaFornecedoresCadastrados(){
+        if(fornecedoresIndex > 0){
+
+            String listaDeFornecedores = "Listagem de Todos os Fornecedores Cadastrados\n\n";
+
+            for (int i = 0; i < fornecedoresIndex; i++) {
+                listaDeFornecedores += "Nome Do Fornecedor: "+fornecedors[i].getNome()+"   Produtos: "+fornecedors[i].getProdutos()[0].getNome()+"...   ID: "+fornecedors[i].getId()+"\n";
             }
 
-        }while (flag != 4);
+            return listaDeFornecedores;
+        }else return "No momento nenhum fornecedor foi cadastrado";
+    }
+
+    public static boolean cadastrarCotacao(){
+        if(produtosIndex > 0 && fornecedoresIndex > 0){
+            try {
+                int Id = Integer.parseInt(JOptionPane.showInputDialog("Atenção você só poderá fechar essa tela ao completar o registro!\n\n Digite um ID para o Fornecedor: "));
+
+                int qtdProdutos = Integer.parseInt(JOptionPane.showInputDialog("ID: "+Id+"\nDigite a quantidade de produtos que você tem no estoque: "));
+                qtdProdutos = qtdProdutos < 0 ? 0 : qtdProdutos;
+
+                String DataSolicitacao = JOptionPane.showInputDialog("ID: "+Id+"\nQuantidade: "+qtdProdutos+"\nDigite a data de solicitação: ");
+
+                Date dataAtual = new Date();
+                DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+
+                DataSolicitacao = DataSolicitacao.length() < 9 ? dataFormatada.format(dataAtual) : DataSolicitacao;
+
+                String NomeSolicitante = JOptionPane.showInputDialog("ID: "+Id+"\nQuantidade: "+qtdProdutos+"\nData: "+DataSolicitacao+"\nDigite o nome do solicitante: ");
+                NomeSolicitante = NomeSolicitante.length() > 0 ? NomeSolicitante : "Usuário Anônimo";
+
+                double ValorCotacao = Double.parseDouble(JOptionPane.showInputDialog("ID: "+Id+"\nQuantidade: "+qtdProdutos+"\nData: "+DataSolicitacao+"\nNome Do Solicitante: "+NomeSolicitante+"\nDigite um valor para a cotação: "));
+                ValorCotacao = ValorCotacao < 0 ? 0.0 : ValorCotacao;
+
+                boolean achouID = false;
+
+                do{
+
+                    String mgsListaDosFornecedor = "Lista De Todos os fornecedores: \n\n";
+
+                    for (int i = 0; i < fornecedoresIndex; i++) {
+                        mgsListaDosFornecedor += "Nome Do Fornecedor: "+fornecedors[i].getId()+"   ID: "+fornecedors[i].getId()+"\n";
+                    }
+
+                    int IdFornecedor = Integer.parseInt(JOptionPane.showInputDialog("ID: "+Id+"\nQuantidade: "+qtdProdutos+"\nData: "+DataSolicitacao+"\nNome Do Solicitante: "+NomeSolicitante+"Valor Da Cotação: R$"+String.format("%.2f", ValorCotacao)+"\n"+mgsListaDosFornecedor+"\nDigite o ID de um Fornecedor: "));
+
+                    for (int i = 0; i < fornecedoresIndex; i++) {
+                        if(fornecedors[i].getId() == IdFornecedor){
+                            achouID = true;
+
+                            boolean cotacaoCadastrou = false;
+
+                            do {
+                                // Listagem De Produtos
+                                String mgsListaDeProdutosPeloFornecedor = "Lista De Todos os produtos oferecidos por esse fornecedor: \n\n";
+
+                                for (int j = 0; j < fornecedors[i].getProdutos().length; j++) {
+                                    mgsListaDeProdutosPeloFornecedor += "Nome Do Produto: "+fornecedors[i].getProdutos()[j].getNome()+"   ID: "+fornecedors[i].getProdutos()[j].getId()+"\n";
+                                }
+
+                                mgsListaDeProdutosPeloFornecedor += "\n\nDigite um dos itens listados acima: ";
+                                // Fim Da Listagem
+
+                                int idProduto = Integer.parseInt(JOptionPane.showInputDialog(mgsListaDeProdutosPeloFornecedor));
+
+                                Cotacao minhaCotacao = new Cotacao(Id, qtdProdutos, DataSolicitacao, NomeSolicitante, ValorCotacao);
+                                try {
+
+                                    // For para pegar o Index do Produto
+                                    boolean achou = false;
+                                    for (int j = 0; j < produtosIndex; j++) {
+                                        if(produtos[j].getId() == idProduto){
+                                            achou = true;
+                                            cotacaoCadastrou = minhaCotacao.CadastrarFornecedor(fornecedors[i], produtos[j]);
+
+                                            if(cotacaoCadastrou){
+                                                if(cotacaoesIndex < 50){
+                                                    cotacaos[cotacaoesIndex] = minhaCotacao;
+
+                                                    JOptionPane.showMessageDialog(null, "Cotação cadastradoda com sucesso no index "+cotacaoesIndex);
+
+                                                    cotacaoesIndex++;
+                                                    return true;
+                                                }else return false;
+                                            }
+                                        }
+                                    }
+
+                                    if(!achou){
+                                        JOptionPane.showMessageDialog(null, "O Id que você digitou para o Produto é inválido");
+                                        return false;
+                                    }
+
+                                }catch (NullPointerException ex){
+                                    System.out.println("ID inválido");
+                                }
+                            }while (!cotacaoCadastrou);
+
+                            break;
+                        }
+                    }
+
+                }while (achouID);
+
+
+                return false;
+
+            }catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "Você digitou uma String no lugar de um número ou\n tentou fechar o programa sem completar o registro por favor tente novamente!");
+                return cadastrarFornecedor();
+            }
+        }else{
+
+            JOptionPane.showMessageDialog(null, "Você não pode cadastrar uma cotação agora porque nenhum produto ou fornecedores foram cadastrado no momento");
+
+            return false;
+        }
+    }
+
+    public static String listaCotacaoCadastradas(){
+        if(cotacaoesIndex > 0){
+
+            String listaDeCotacoes = "Listagem de Todos as Cotações Cadastrados\n\n";
+
+            for (int i = 0; i < cotacaoesIndex; i++) {
+                listaDeCotacoes += "Nome Do Solicitante: "+cotacaos[i].getNomeSolicitante()+"   Data: "+cotacaos[i].getDataSolicitacao() +"   ID: "+cotacaos[i].getId()+"\n";
+            }
+
+            return listaDeCotacoes;
+        }else return "No momento nenhuma cotação foi cadastrado";
+    }
+
+    public static boolean cadastrarOrcamento(){
+        if(cotacaoesIndex > 0){
+            String Nome = JOptionPane.showInputDialog("Digite um nome para o seu orçamento: ");
+            Nome = Nome.length() > 0 ? Nome : "Não foi informado";
+
+            String Descricao = JOptionPane.showInputDialog("Nome: "+Nome+"\nDigite uma descrição para o orçamento: ");
+            Descricao = Descricao.length() > 0 ? Descricao : "Não foi informado";
+
+            if(orcamentosIndex < 50){
+
+                Orcamento meuOrcamento = new Orcamento(Nome, Descricao);
+
+                orcamentos[orcamentosIndex] = meuOrcamento;
+
+                JOptionPane.showMessageDialog(null, "Orçamento cadastrado com sucesso no index "+orcamentosIndex);
+
+                orcamentosIndex++;
+
+                return true;
+            }else return false;
+        }
+
+        JOptionPane.showMessageDialog(null, "Você não pode cadastrar um orçamento porque não tem nenhuma cotação cadastrada!");
+
+        return false;
+    }
+
+    public static String listaOrcamentosCadastradas(){
+        if(orcamentosIndex > 0){
+
+            String listaDeOrcamentos = "Listagem de Todos os Orçamentos Cadastrados\n\n";
+
+            for (int i = 0; i < orcamentosIndex; i++) {
+        listaDeOrcamentos += "Nome Do Orcamento: "+orcamentos[i].getNomeObra()+"   Descrição: "+orcamentos[i].getDescricaoReforma()+"  ID:  "+i+"\n";
+            }
+
+            return listaDeOrcamentos;
+        }else return "No momento nenhum orçamento foi cadastrado";
     }
 }

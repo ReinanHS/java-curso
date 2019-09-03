@@ -77,7 +77,7 @@ public class Fornecedor {
 
             Produto produtos[] = new Produto[this.getProdutos().length+1];
             for (int i = 0; i < this.getProdutos().length; i++) {
-                if(this.getProdutos()[i] != produto){
+                if(this.getProdutos()[i] != produto && this.getProdutos()[i].getId() != produto.getId()){
                     produtos[i] = this.getProdutos()[i];
                 }else{ return false; }
             }

@@ -40,6 +40,14 @@ public class Cotacao {
         this.ValorCotacao = valorCotacao;
     }
 
+    public Cotacao(int id, int qtd_Produtos, String data_Solicitacao, String nome_Solicitante, Double valorCotacao) {
+        Id = id;
+        Qtd_Produtos = qtd_Produtos;
+        Data_Solicitacao = data_Solicitacao;
+        Nome_Solicitante = nome_Solicitante;
+        ValorCotacao = valorCotacao;
+    }
+
     @Override
     public String toString() {
         return "Cotacao{" +
@@ -79,19 +87,17 @@ public class Cotacao {
         Qtd_Produtos = qtd_Produtos;
     }
 
-    public String getData_Solicitacao() {
-        return Data_Solicitacao;
-    }
+    public String getDataSolicitacao() { return Data_Solicitacao; }
 
-    public void setData_Solicitacao(String data_Solicitacao) {
+    public void setDataSolicitacao(String data_Solicitacao) {
         Data_Solicitacao = data_Solicitacao;
     }
 
-    public String getNome_Solicitante() {
+    public String getNomeSolicitante() {
         return Nome_Solicitante;
     }
 
-    public void setNome_Solicitante(String nome_Solicitante) {
+    public void setNomeSolicitante(String nome_Solicitante) {
         Nome_Solicitante = nome_Solicitante;
     }
 
@@ -111,5 +117,22 @@ public class Cotacao {
         ValorCotacao = valorCotacao;
     }
 
+    public void setData_Solicitacao(String data_Solicitacao) {
+        Data_Solicitacao = data_Solicitacao;
+    }
+
     // Métados
+    // Método responsavel por validar se o Fornecedor oferece o produto
+    public boolean CadastrarFornecedor(Fornecedor fornecedor, Produto produto){
+        for (int i = 0; i < fornecedor.getProdutos().length ; i++) {
+            if(fornecedor.getProdutos()[i] == produto){
+                this.Fornecedor = fornecedor;
+                this.Produto = produto;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

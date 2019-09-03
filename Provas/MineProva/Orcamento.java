@@ -63,7 +63,7 @@ public class Orcamento {
 
             Cotacao cotacaos[] = new Cotacao[this.getListaCotacoes().length+1];
             for (int i = 0; i < this.getListaCotacoes().length; i++) {
-                if(this.getListaCotacoes()[i] != cotacao){
+                if(this.getListaCotacoes()[i] != cotacao && this.getListaCotacoes()[i].getId() != cotacao.getId()){
                     cotacaos[i] = this.getListaCotacoes()[i];
                 }else{ return false; }
             }
