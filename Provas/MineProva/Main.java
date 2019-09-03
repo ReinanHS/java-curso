@@ -43,7 +43,7 @@ public class Main {
             mgs += "07 - Cadastrar Cotações\n";
             mgs += "08 - Cadastrar Orçamentos\n";
 
-            mgs += "19 - Opções avançadas relacionadas ao orçamento\n\n";
+            mgs += "09 - Opções avançadas relacionadas ao orçamento\n\n";
 
             mgs += "10 - Sair\n\n";
 
@@ -94,7 +94,129 @@ public class Main {
                     case 9: {
                         String mgsOrcamento = "Opções avançadas para orçamento\n\n";
 
-                        mgsOrcamento += "01"
+                        mgsOrcamento += "01 - Cadastrar Cotacao\n";
+                        mgsOrcamento += "02 - Obter Cotação Menor Valor\n";
+                        mgsOrcamento += "03 - Buscar Cotação Por Fornecedor\n";
+                        mgsOrcamento += "04 - Listar Cotações\n\n";
+                        mgsOrcamento += "05 - Voltar\n";
+
+                        int ValorOpicao = 0;
+
+                        do{
+                            try{
+                                ValorOpicao = Integer.parseInt(JOptionPane.showInputDialog(mgsOrcamento));
+
+
+                                if(orcamentosIndex > 0){
+                                    switch (ValorOpicao){
+                                        case 1: {
+
+                                            try {
+                                                int indexOrcamento = Integer.parseInt(JOptionPane.showInputDialog("Digite aqui o index do orçamento: "));
+                                                int idCotacao = Integer.parseInt(JOptionPane.showInputDialog("Digite aqui o ID da cotação que você vai cadastrar: "));
+
+                                                for (int i = 0; i < cotacaoesIndex; i++) {
+                                                    if(cotacaos[i].getId() == idCotacao){
+                                                        if(orcamentos[indexOrcamento].CadastrarCotacao(cotacaos[i])){
+                                                            JOptionPane.showMessageDialog(null, "Cotação cadastrada no Orçamento!");
+                                                        }
+                                                    }
+                                                }
+                                            }catch (NullPointerException ex){
+                                                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a cotação veja o index da cotação");
+                                            }catch (ArrayIndexOutOfBoundsException ex){
+                                                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a cotação veja o index da cotação");
+                                            }
+
+                                            break;
+                                        }
+                                        case 2: {
+
+                                            try {
+                                                int indexOrcamento = Integer.parseInt(JOptionPane.showInputDialog("Digite aqui o index do orçamento: "));
+
+                                                JOptionPane.showMessageDialog(null, "A cotação de menor valor é: \nNome Do solicitante: "+orcamentos[indexOrcamento].ObterCotacaoMenorValor().getNomeSolicitante()+"  ID: "+orcamentos[indexOrcamento].ObterCotacaoMenorValor().getId());
+
+                                            }catch (NullPointerException ex){
+                                                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a cotação veja o index da cotação");
+                                            }catch (ArrayIndexOutOfBoundsException ex){
+                                                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a cotação veja o index da cotação");
+                                            }
+
+                                            break;
+                                        }
+                                        case 3: {
+
+                                            try {
+                                                int indexOrcamento = Integer.parseInt(JOptionPane.showInputDialog("Digite aqui o index do orçamento: "));
+                                                int idFornecedor = Integer.parseInt(JOptionPane.showInputDialog("Digite aqui o ID do Fornecedor: "));
+
+                                                for (int i = 0; i < fornecedoresIndex; i++) {
+                                                    if(fornecedors[i].getId() == idFornecedor){
+
+                                                        Cotacao Lista[] = orcamentos[indexOrcamento].BuscarCotacaoPorFornecedor( fornecedors[i] );
+
+                                                        if(Lista != null){
+
+                                                            String mgsCotacoes = "";
+
+                                                            for (int j = 0; j < Lista.length; j++) {
+                                                                mgsCotacoes += "Nome Solicitante: "+Lista[j].getNomeSolicitante()+" ID: "+Lista[j].getId()+"\n";
+                                                            }
+
+                                                            JOptionPane.showMessageDialog(null, mgsCotacoes);
+                                                        }
+                                                    }
+                                                }
+
+                                                JOptionPane.showMessageDialog(null, "A cotação de menor valor é: \nNome Do solicitante: "+orcamentos[indexOrcamento].ObterCotacaoMenorValor().getNomeSolicitante()+"  ID: "+orcamentos[indexOrcamento].ObterCotacaoMenorValor().getId());
+
+                                            }catch (NullPointerException ex){
+                                                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a cotação veja o index da cotação");
+                                            }catch (ArrayIndexOutOfBoundsException ex){
+                                                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a cotação veja o index da cotação");
+                                            }
+
+                                            break;
+                                        }
+                                        case 4: {
+
+                                            try {
+                                                int indexOrcamento = Integer.parseInt(JOptionPane.showInputDialog("Digite aqui o index do orçamento: "));
+                                                double MairValor = Double.parseDouble(JOptionPane.showInputDialog("Digite o maior valor: "));
+
+                                                JOptionPane.showMessageDialog(null, orcamentos[indexOrcamento].ListarCotacaoes( MairValor ));
+
+
+                                            }catch (NullPointerException ex){
+                                                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a cotação veja o index da cotação");
+                                            }catch (ArrayIndexOutOfBoundsException ex){
+                                                JOptionPane.showMessageDialog(null, "Erro ao cadastrar a cotação veja o index da cotação");
+                                            }
+
+                                            break;
+                                        }
+                                        case 5: {
+                                            System.out.println("Voltar");
+                                            break;
+                                        }
+                                        default:{
+                                            JOptionPane.showMessageDialog(null, "Você digitou um valor inválido por favor digite novamente!");
+                                            break;
+                                        }
+                                    }
+                                }else{
+                                    JOptionPane.showMessageDialog(null, "Não foi cadastrado nenhuma orcamento então você não pode utilizar essa opição!");
+                                }
+
+
+                                break;
+
+                            }catch (NumberFormatException ex){
+                                ValorOpicao = 0;
+                                JOptionPane.showMessageDialog(null, "Você digitou um valor inválido por favor digite novamente!");
+                            }
+                        }while (ValorOpicao != 5);
 
                         break;
                     }
