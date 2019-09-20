@@ -1,0 +1,53 @@
+- Médico
+    Vetor
+        * CRM (int)
+        * Nome (String)
+        * vlrConsulta (Double)
+    Métados
+        * Medico ( int cRM, String nome, double vlConsulta )
+            Construtor Default
+        * TotalConsulta ( int pTempoTotal)
+            Total da consulta
+            Dependendo Tipo.
+- Pediatria
+    * anosExperiencia
+
+    Regras Para TotalConsulta
+        if anosExperiencia >= 10:
+          ((valor da hora * Tempo total) * 2)
+        else:
+          ((valor da hora * Tempo total))
+
+- ClinicoGeral
+    realizaCirugia
+
+    Regras Para Clinico Geral
+            if realizaCirugia:
+              ((valor da hora * Tempo total) * 10000)
+            else:
+              ((valor da hora * Tempo total))
+
+- Consulta
+    - Atributos
+        codConsulta
+        medicoResponsavel (Medico)
+
+- Clinica
+
+    * nomeClinica (String)
+    * endereco (String)
+    * listaMedicos [] (Medicos)
+    * listaConsultas [] (Consulta)
+
+
+    Construcotor
+
+    Clinica(String, nnClinica, String endereco)
+        Inicializado
+            Médicos e o vetor de Consultas.
+
+    Métados
+    contratarMedico(Medico pMedico) : boolean
+        * equalse CRM
+
+    BuscarMedico(int pCRM)
