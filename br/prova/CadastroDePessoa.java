@@ -60,7 +60,7 @@ public class CadastroDePessoa {
 
             Pessoa pessoas[] = new Pessoa[this.getPessoa().length+1];
             for (int i = 0; i < this.getPessoa().length; i++) {
-                if(this.getPessoa()[i] != pessoa && this.getPessoa()[i].getId() != pessoa.getId()){
+                if(!this.getPessoa()[i].equals(pessoa)){
                     pessoas[i] = this.getPessoa()[i];
                 }else{ return false; }
             }
@@ -85,7 +85,7 @@ public class CadastroDePessoa {
         }
     }
 
-    private Pessoa buscarPessoaPorId(int id){
+    public Pessoa buscarPessoaPorId(int id){
         for (Pessoa pessoa: this.getPessoa()) {
             if(pessoa.getId() == id) return pessoa;
         }
@@ -93,7 +93,7 @@ public class CadastroDePessoa {
         return null;
     }
 
-    private Pessoa buscarPessoaPorNome(String nome){
+    public Pessoa buscarPessoaPorNome(String nome){
         for (Pessoa pessoa: this.getPessoa()) {
             if(pessoa.getNome().equals(nome)) return pessoa;
         }

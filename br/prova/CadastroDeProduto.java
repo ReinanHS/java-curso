@@ -1,5 +1,7 @@
 package br.prova;
 
+import java.util.Arrays;
+
 public class CadastroDeProduto {
     /*
         IFS - Instituto Federal Sergipe, Campus Lagarto
@@ -55,7 +57,7 @@ public class CadastroDeProduto {
             int qtdLista = 0;
 
             for (int i = 0; i < lista.length; i++) {
-                if(!this.getProduto()[i].equals(produto)){
+                if(this.getProduto()[i] != null && !this.getProduto()[i].equals(produto)){
                     lista[qtdLista] = this.getProduto()[i];
                     qtdLista++;
                 }
@@ -181,5 +183,12 @@ public class CadastroDeProduto {
         return null;
     }
 
-
+    @Override
+    public String toString() {
+        return "CadastroDeProduto{" +
+                "produto=" + Arrays.toString(produto) +
+                ", qtdProdutos=" + qtdProdutos +
+                ", produtoIndex=" + produtoIndex +
+                '}';
+    }
 }

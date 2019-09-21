@@ -26,8 +26,6 @@ public class Filme extends Produto {
         super(id, titulo);
         this.categoria = categoria;
         this.classificacao = classificacao;
-
-        this.atores = new Pessoa[qtdAtores];
     }
 
     // Métados Especiais Gets e Sets
@@ -69,7 +67,6 @@ public class Filme extends Produto {
      *
      * Essa é a função responsável por fazer o cadastramento de um pessoa
      *
-     * @param
      * @return Boolean
     */
     public boolean addAtores(Pessoa pessoa){
@@ -82,27 +79,40 @@ public class Filme extends Produto {
         *
         */
 
-        if(this.getQtdAtores() < this.getAtores().length){
-            this.atores[this.getQtdAtores()] = pessoa;
-            this.qtdAtores++;
+        try {
+
+            Pessoa pessoas[] = new Pessoa[this.getAtores().length+1];
+            for (int i = 0; i < this.getAtores().length; i++) {
+                if(!this.getAtores()[i].equals(pessoa) ){
+                    pessoas[i] = this.getAtores()[i];
+                }else{ return false; }
+            }
+
+            pessoas[this.getAtores().length] = pessoa;
+
+            this.setAtores(pessoas);
 
             return true;
+
+
+        }catch (NullPointerException ex){
+
+            Pessoa pessoas[] = new Pessoa[1];
+            pessoas[0] = pessoa;
+
+            this.setAtores(pessoas);
+
+            return true;
+
+
         }
-
-        return false;
-
     }
 
     public boolean temEssaPessoa(Pessoa pessoa){
-        if(this.getQtdAtores() > 0){
-
-            for (int i = 0; i < this.getQtdAtores(); i++) {
-                if(this.getAtores()[i].equals(pessoa)){
-                    return true;
-                }
+        for(Pessoa pessoa1 : this.getAtores() ){
+            if(pessoa1.equals(pessoa)){
+                return true;
             }
-
-            return false;
         }
 
         return false;

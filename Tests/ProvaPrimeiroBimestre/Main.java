@@ -10,14 +10,5 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         int valor = input.nextInt();
-
-        switch (valor){
-            case 1: {
-
-                Medico medico = new Medico();
-
-                break;
-            }
-        }
     }
 }
