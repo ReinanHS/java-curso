@@ -1,4 +1,4 @@
-package br.prova;
+package br.livraria;
 
 public class Livro extends Produto{
     /*
@@ -10,7 +10,7 @@ public class Livro extends Produto{
 
     // Atributos
     private Pessoa autor;
-    private String editora;
+    private String editora = "";
     private int anoDePublicacao;
     // Métados Especiais
 

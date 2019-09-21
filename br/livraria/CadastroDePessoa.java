@@ -1,4 +1,4 @@
-package br.prova;
+package br.livraria;
 
 import java.util.Arrays;
 
@@ -55,6 +55,8 @@ public class CadastroDePessoa {
         * Caso o contrário eu crio mais uma posição no vetor e coloco o valor que foi passado como Parâmetro na ultima posição.
         *
         */
+
+        if(pessoa == null) return false;
 
         try {
 

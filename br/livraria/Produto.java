@@ -1,4 +1,4 @@
-package br.prova;
+package br.livraria;
 
 public class Produto {
     /*

@@ -1,4 +1,4 @@
-package br.prova;
+package br.livraria;
 
 import java.util.Arrays;
 
@@ -52,7 +52,7 @@ public class CadastroDeProduto {
     }
 
     public Produto removerProduto(Produto produto){
-        if(this.produtoIndex > 0){
+        if(this.produtoIndex > 0 && produto != null){
             Produto lista[] = new Produto[this.getQtdProdutos()];
             int qtdLista = 0;
 
@@ -74,7 +74,7 @@ public class CadastroDeProduto {
 
     public Produto buscarProdutoPorId(int id){
         for (int i = 0; i < this.produtoIndex; i++) {
-            if(this.getProduto()[i].id == id){
+            if(this.getProduto()[i] != null && this.getProduto()[i].id == id){
                 return this.getProduto()[i];
             }
         }
@@ -108,7 +108,7 @@ public class CadastroDeProduto {
                         index++;
                     }
                 }else if(this.getProduto()[i] instanceof Livro){
-                    if( ((Livro) this.getProduto()[i]).getAutor().equals(pessoa) ){
+                    if( ((Livro) this.getProduto()[i]).getAutor() != null && ((Livro) this.getProduto()[i]).getAutor().equals(pessoa) ){
                         lista[index] = this.getProduto()[i];
                         index++;
                     }
@@ -128,7 +128,7 @@ public class CadastroDeProduto {
 
             for (int i = 0; i < this.produtoIndex; i++) {
                 if(this.getProduto()[i] instanceof Livro){
-                    if( ((Livro) this.getProduto()[i]).getAutor().equals(pessoa) ){
+                    if( ((Livro) this.getProduto()[i]).getAutor() != null && ((Livro) this.getProduto()[i]).getAutor().equals(pessoa) ){
                         lista[index] = this.getProduto()[i];
                         index++;
                     }
@@ -142,7 +142,7 @@ public class CadastroDeProduto {
     }
 
     public Produto[] listarLivrosDaEditorarNoPeriodo(String nome, int primeiroAno, int SegundoAno){
-        if(this.produtoIndex > 0){
+        if(nome != null && nome.length() > 0 && this.produtoIndex > 0){
             Produto lista[] = new Produto[this.produtoIndex];
             int index = 0;
 
@@ -170,7 +170,7 @@ public class CadastroDeProduto {
             for (int i = 0; i < this.produtoIndex; i++) {
                 if(this.getProduto()[i] instanceof Filme){
                     Filme filme = ((Filme) this.getProduto()[i]);
-                    if( filme.getCategoria().equals(categoria) && filme.getClassificacao().equals(classificacao) && filme.temEssaPessoa(pessoa) ){
+                    if( filme != null & filme.getCategoria().equals(categoria) && filme.getClassificacao().equals(classificacao) && filme.temEssaPessoa(pessoa) ){
                         lista[index] = this.getProduto()[i];
                         index++;
                     }

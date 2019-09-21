@@ -1,4 +1,4 @@
-package br.prova;
+package br.livraria;
 
 import java.util.Arrays;
 
@@ -79,6 +79,8 @@ public class Filme extends Produto {
         *
         */
 
+        if(pessoa == null) return false;
+
         try {
 
             Pessoa pessoas[] = new Pessoa[this.getAtores().length+1];
@@ -91,6 +93,7 @@ public class Filme extends Produto {
             pessoas[this.getAtores().length] = pessoa;
 
             this.setAtores(pessoas);
+            this.setQtdAtores(pessoas.length);
 
             return true;
 
@@ -101,6 +104,7 @@ public class Filme extends Produto {
             pessoas[0] = pessoa;
 
             this.setAtores(pessoas);
+            this.setQtdAtores(pessoas.length);
 
             return true;
 
@@ -110,7 +114,7 @@ public class Filme extends Produto {
 
     public boolean temEssaPessoa(Pessoa pessoa){
         for(Pessoa pessoa1 : this.getAtores() ){
-            if(pessoa1.equals(pessoa)){
+            if(pessoa1 != null && pessoa1.equals(pessoa)){
                 return true;
             }
         }
