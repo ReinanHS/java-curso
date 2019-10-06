@@ -14,7 +14,7 @@ public class Evento {
         this.titulo = titulo;
         this.resumo = resumo;
         this.qtdMaximaDeParticipnates = qtdMaximaDeParticipnates;
-        this.participantes = new Participante[qtdMaximaDeParticipnates];
+        //this.participantes = new Participante[qtdMaximaDeParticipnates];
         this.local = local;
         this.horario = horario;
         this.duracao = duracao;
@@ -94,6 +94,63 @@ public class Evento {
         return str;
     }
 
+    public boolean cadastroParticipantes(Participante participante){
+        try{
+
+            if(this.participantes.length <= this.getQtdMaximaDeParticipnates()){
+                Participante participantes[] = new Participante[this.participantes.length+1];
+
+                for (int i = 0; i < this.participantes.length; i++) {
+                    if(!this.participantes[i].equals(participante)){
+                        participantes[i] = this.participantes[i];
+                    }else return false;
+                }
+
+                participantes[this.participantes.length] = participante;
+
+                this.participantes = participantes;
+
+                return true;
+            }
+
+            return false;
+
+        }catch(NullPointerException ex){
+            Participante participantes[] = new Participante[1];
+            participantes[0] = participante;
+
+            this.participantes = participantes;
+
+            return true;
+        }
+    }
+
+    public boolean removerParticipantes(Participante participante){
+
+        try{
+
+            if(this.participantes.length > 0){
+                Participante participantes[] = new Participante[this.participantes.length-1];
+                int qtd = 0;
+
+                for (Participante x: this.participantes ) {
+                    if(!x.equals(participante)){
+                        participantes[qtd] = x;
+                        qtd++;
+                    }
+                }
+
+                this.participantes = participantes;
+                return true;
+            }
+
+            return false;
+
+        }catch (NullPointerException ex){
+            return false;
+        }
+    }
+
     public boolean cadastroRecursos(Recursos recurso){
         try{
 
@@ -105,11 +162,15 @@ public class Evento {
 
             recursos[this.recursos.length] = recurso;
 
+            this.recursos = recursos;
+
             return true;
 
         }catch(NullPointerException ex){
             Recursos recursos[] = new Recursos[1];
             recursos[0] = recurso;
+
+            this.recursos = recursos;
 
             return true;
         }
