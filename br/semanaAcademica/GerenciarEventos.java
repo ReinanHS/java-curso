@@ -133,6 +133,7 @@ public class GerenciarEventos {
 
         try{
             for(Recursos y: this.Recursos){
+                listagem += "Código: ["+y.getCodigo()+"]\n";
                 listagem += "Nome: ["+y.getNome()+"]\n";
                 listagem += "Descrição: ["+y.getDescricao()+"]\n";
                 listagem += "Quantitativo de vagas: ["+y.getQuantitativo()+"]\n\n";

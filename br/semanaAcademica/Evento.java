@@ -1,5 +1,7 @@
 package br.semanaAcademica;
 
+import java.util.Arrays;
+
 public class Evento {
     protected String titulo;
     protected String resumo;
@@ -87,8 +89,12 @@ public class Evento {
     public String recursosToString(){
         String str = "";
 
-        for (Recursos x: this.recursos) {
-            str += x.getNome()+" ";
+        try{
+            for (Recursos x: this.recursos) {
+                str += x.getNome()+" ";
+            }
+        }catch (NullPointerException ex){
+            str = "Não foi cadastrado";
         }
 
         return str;
@@ -216,5 +222,19 @@ public class Evento {
         }
 
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "titulo='" + titulo + '\'' +
+                ", resumo='" + resumo + '\'' +
+                ", qtdMaximaDeParticipnates=" + qtdMaximaDeParticipnates +
+                ", participantes=" + Arrays.toString(participantes) +
+                ", local='" + local + '\'' +
+                ", horario='" + horario + '\'' +
+                ", duracao=" + duracao +
+                ", recursos=" + Arrays.toString(recursos) +
+                '}';
     }
 }

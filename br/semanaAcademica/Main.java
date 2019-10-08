@@ -1,6 +1,7 @@
 package br.semanaAcademica;
 
 import javax.swing.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -95,13 +96,20 @@ public class Main {
             }
             case 5: {
                 String matricula = SistemaInteracao.getUI("Digite a matricula: ");
-                for(Participante x : gerenciarEventos.getParticipantes()){
-                    if(x.getMatricula().equals(matricula)){
-                        gerenciarEventos.removerParticipante(x);
-                        menuParticipante();
-                        break;
+                try{
+                    for(Participante x : gerenciarEventos.getParticipantes()){
+                        if(x.getMatricula().equals(matricula)){
+                            gerenciarEventos.removerParticipante(x);
+                            menuParticipante();
+                            break;
+                        }
                     }
+                }catch (NullPointerException ex){
+                    SistemaInteracao.showMessage("Não tem participantes");
+                    //menuParticipante();
                 }
+                SistemaInteracao.showMessage("Não foi encontrado nenhum participante com essa matrícula");
+                menuParticipante();
                 break;
             }
             case 6: {
@@ -121,13 +129,15 @@ public class Main {
         mgs += "[03] - Cadastrar Palestra\n";
         mgs += "[04] - Cadastrar Mini Curso\n";
         mgs += "[05] - Remover um Evento\n";
-        mgs += "[06] - Voltar\n";
+        mgs += "[06] - Cadastrar Recurso em um Evento\n";
+        mgs += "[07] - Cadastrar Participante em um Evento\n";
+        mgs += "[08] - Voltar\n";
 
         int flag = 0;
 
         do{
             flag = SistemaInteracao.getIntUI(mgs);
-        }while (flag < 1 && flag >= 6);
+        }while (flag < 1 && flag >= 7);
 
         switch (flag){
             case 1: {
@@ -152,16 +162,94 @@ public class Main {
             }
             case 5: {
                 String titulo = SistemaInteracao.getUI("Digite um titulo: ");
-                for(Evento x : gerenciarEventos.getEventos()){
-                    if(x.getTitulo().equals(titulo)){
-                        gerenciarEventos.removerEventos(x);
-                        menuEvento();
-                        break;
+                try{
+                    for(Evento x : gerenciarEventos.getEventos()){
+                        if(x.getTitulo().equals(titulo)){
+                            gerenciarEventos.removerEventos(x);
+                            menuEvento();
+                            break;
+                        }
                     }
+                }catch (NullPointerException ex){
+                    SistemaInteracao.showMessage("Não tem evento!");
                 }
+                SistemaInteracao.showMessage("Não foi encontrado o evento com esse titulo!");
+                menuEvento();
                 break;
             }
             case 6: {
+                String titulo = SistemaInteracao.getUI("Digite um titulo do evento para cadastrar um recurso: ");
+                try{
+                    for(Evento x : gerenciarEventos.getEventos()){
+                        if(x.getTitulo().equals(titulo)){
+
+                            int codigo = SistemaInteracao.getIntUI("Digite o código do recurso: ");
+
+                            try{
+                                for(Recursos y : gerenciarEventos.getRecursos()){
+                                    if(y.getCodigo() == codigo){
+                                        x.cadastroRecursos(y);
+                                        gerenciarEventos.removerEventos(x);
+                                        gerenciarEventos.cadastroDeEventos(x);
+                                        menuEvento();
+                                        break;
+                                    }
+                                }
+                            }catch (NullPointerException ex){
+                                SistemaInteracao.showMessage("Não tem recurso");
+                            }
+
+                            SistemaInteracao.showMessage("Não foi encontrado o recurso com esse código!");
+                            menuEvento();
+                            break;
+                        }
+                    }
+                }catch (NullPointerException ex){
+                    SistemaInteracao.showMessage("Não tem evento!");
+                    //menuEvento();
+                }
+                SistemaInteracao.showMessage("Não foi encontrado o evento com esse titulo!");
+                menuEvento();
+                break;
+            }
+            case 7: {
+                String titulo = SistemaInteracao.getUI("Digite um titulo do evento para cadastrar um participante: ");
+                try{
+                    for(Evento x : gerenciarEventos.getEventos()){
+                        if(x.getTitulo().equals(titulo)){
+
+                            String matricula = SistemaInteracao.getUI("Digite a matricula do Participante: ");
+
+                            try{
+                                for(Participante y : gerenciarEventos.getParticipantes()){
+                                    if(y.getMatricula().equals(matricula)){
+                                        x.cadastroParticipantes(y);
+                                        gerenciarEventos.removerEventos(x);
+                                        gerenciarEventos.cadastroDeEventos(x);
+                                        menuEvento();
+                                        break;
+                                    }
+                                }
+                            }catch (NullPointerException ex){
+                                SistemaInteracao.showMessage("Não tem participante");
+                                //menuEvento();
+                            }
+
+                            SistemaInteracao.showMessage("Não foi encontrado um participante com essa marticula!");
+                            menuEvento();
+
+                            break;
+                        }
+                    }
+                }catch (NullPointerException ex){
+                    SistemaInteracao.showMessage("Não tem evento!");
+                    //menuEvento();
+                }
+                SistemaInteracao.showMessage("Não foi encontrado o evento com esse titulo!");
+                menuEvento();
+                break;
+            }
+            case 8: {
                 menu();
                 break;
             }
@@ -197,13 +285,18 @@ public class Main {
             }
             case 3: {
                 int codigo = SistemaInteracao.getIntUI("Digite um codigo: ");
-                for(Recursos x : gerenciarEventos.getRecursos()){
-                    if(x.getCodigo() == codigo){
-                        gerenciarEventos.removerRecurso(x);
-                        menuRecursos();
-                        break;
+                try{
+                    for(Recursos x : gerenciarEventos.getRecursos()){
+                        if(x.getCodigo() == codigo){
+                            gerenciarEventos.removerRecurso(x);
+                            menuRecursos();
+                            break;
+                        }
                     }
+                }catch (NullPointerException ex){
+                    SistemaInteracao.showMessage("Não foi encontrado um recurso com esse código");
                 }
+                menuRecursos();
                 break;
             }
             case 4: {

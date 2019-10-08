@@ -1,5 +1,7 @@
 package br.semanaAcademica;
 
+import java.util.Arrays;
+
 public class Teste {
     public static void main(String[] args) {
 //        Alunos reinan = new Alunos("2019004705","Reinan Gabriel", 1,"BSI", "1");
@@ -15,6 +17,10 @@ public class Teste {
 //        evento1.cadastroParticipantes(lucas);
 //        evento1.cadastroParticipantes(davi);
 
-        System.out.println(SistemaInteracao.criarParticipante());
+        GerenciarEventos gerenciarEventos = new GerenciarEventos();
+
+
+        gerenciarEventos.cadastroDeEventos(SistemaInteracao.criarEvento());
+        System.out.println(Arrays.toString(gerenciarEventos.listarEventos()));
     }
 }
