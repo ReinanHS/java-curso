@@ -20,6 +20,12 @@ public class Minicurso extends Evento{
         this.metodologia = metodologia;
     }
 
+    public Minicurso(Evento evento, String publicoAlvo, String metodologia) {
+        super(evento.titulo, evento.resumo, evento.qtdMaximaDeParticipnates,evento.local,evento.horario,evento.duracao);
+        this.publicoAlvo = publicoAlvo;
+        this.metodologia = metodologia;
+    }
+
     public boolean ministrantesTemProfessor(){
         try{
             for(Participante x : this.ministrantes){

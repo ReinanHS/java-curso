@@ -5,12 +5,14 @@ public class Participante {
     protected String nome;
     protected int nivelEscolar;
     protected String curso;
+    protected String instituicao;
 
-    public Participante(String matricula, String nome, int nivelEscolar, String curso) {
+    public Participante(String matricula, String nome, int nivelEscolar, String curso, String instituicao) {
         this.matricula = matricula;
         this.nome = nome;
         this.nivelEscolar = nivelEscolar;
         this.curso = curso;
+        this.instituicao = instituicao;
     }
 
     public String getMatricula() {
@@ -45,13 +47,22 @@ public class Participante {
         this.curso = curso;
     }
 
+    public String getInstituicao() {
+        return instituicao;
+    }
+
+    public void setInstituicao(String instituicao) {
+        this.instituicao = instituicao;
+    }
+
     @Override
     public String toString() {
         return "Participante{" +
-                "matricula='" + matricula + '\'' +
-                ", nome='" + nome + '\'' +
-                ", nivelEscolar=" + nivelEscolar +
-                ", curso='" + curso + '\'' +
+                "Matricula='" + matricula + '\'' +
+                ", Nome='" + nome + '\'' +
+                ", Nivel Escolar=" + nivelEscolar +
+                ", Curso='" + curso + '\'' +
+                ", Instituição='" + instituicao + '\'' +
                 '}';
     }
 

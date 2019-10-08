@@ -2,13 +2,17 @@ package br.semanaAcademica;
 
 public class Professor extends Participante{
     private String cpf;
-    private String instituicao;
     private int rg;
 
-    public Professor(String matricula, String nome, int nivelEscolar, String curso, String cpf, String instituicao, int rg) {
-        super(matricula, nome, nivelEscolar, curso);
+    public Professor(String matricula, String nome, int nivelEscolar, String curso, String instituicao, String cpf, int rg) {
+        super(matricula, nome, nivelEscolar, curso, instituicao);
         this.cpf = cpf;
-        this.instituicao = instituicao;
+        this.rg = rg;
+    }
+
+    public Professor(Participante participante,String cpf, int rg) {
+        super(participante.matricula, participante.nome, participante.nivelEscolar, participante.curso, participante.instituicao);
+        this.cpf = cpf;
         this.rg = rg;
     }
 

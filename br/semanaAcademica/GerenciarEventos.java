@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class GerenciarEventos {
     private Participante Participantes[];
     private Evento Eventos[];
+    private Recursos Recursos[];
 
     public GerenciarEventos() { }
 
@@ -31,6 +32,116 @@ public class GerenciarEventos {
 
             return true;
         }
+    }
+
+    public boolean removerParticipante(Participante participante){
+
+        try{
+
+            if(this.Participantes.length > 0){
+                Participante participantes[] = new Participante[this.Participantes.length-1];
+                int qtd = 0;
+
+                for (Participante x: this.Participantes ) {
+                    if(!x.equals(participante)){
+                        participantes[qtd] = x;
+                        qtd++;
+                    }
+                }
+
+                this.Participantes = participantes;
+                return true;
+            }
+
+            return false;
+
+        }catch (NullPointerException ex){
+            return false;
+        }
+    }
+
+    public String listarParticipantesToString(){
+
+        String listagem = "";
+
+        try{
+            for(Participante y: this.Participantes){
+                listagem += "Nome: ["+y.getNome()+"]\n";
+                listagem += "Curso: ["+y.getCurso()+"]\n";
+                listagem += "Instituição: ["+y.getInstituicao()+"]\n\n";
+            }
+        }catch (NullPointerException ex){
+            listagem = "Não tem participantes";
+        }
+
+        return listagem;
+    }
+
+    public boolean cadastroDeRecursos(Recursos recurso){
+        try{
+
+            Recursos recursos[] = new Recursos[this.Recursos.length+1];
+
+            for (int i = 0; i < this.Recursos.length; i++) {
+                recursos[i] = this.Recursos[i];
+            }
+
+            recursos[this.Recursos.length] = recurso;
+            this.Recursos = recursos;
+
+            return true;
+
+        }catch(NullPointerException ex){
+            Recursos recursos[] = new Recursos[1];
+            recursos[0] = recurso;
+
+            this.Recursos = recursos;
+
+            return true;
+        }
+    }
+
+    public boolean removerRecurso(Recursos recurso){
+
+        try{
+
+            if(this.Recursos.length > 0){
+                Recursos recursos[] = new Recursos[this.Recursos.length-1];
+                int qtd = 0;
+
+                for (Recursos x: this.Recursos ) {
+                    if(!x.equals(recurso)){
+                        recursos[qtd] = x;
+                        qtd++;
+                    }
+                }
+
+                this.Recursos = recursos;
+                return true;
+            }
+
+            return false;
+
+        }catch (NullPointerException ex){
+            return false;
+        }
+    }
+
+    public String listarRecurosToString(){
+
+        String listagem = "";
+
+        try{
+            for(Recursos y: this.Recursos){
+                listagem += "Nome: ["+y.getNome()+"]\n";
+                listagem += "Descrição: ["+y.getDescricao()+"]\n";
+                listagem += "Quantitativo de vagas: ["+y.getQuantitativo()+"]\n\n";
+            }
+        }catch (NullPointerException ex){
+            listagem = "Não tem Recusos";
+        }
+
+        return listagem;
     }
 
 
@@ -89,14 +200,18 @@ public class GerenciarEventos {
         Palestra palestras[] = new Palestra[this.getTamanhoPalestra()];
         int qtdPalestras = 0;
 
-        for(Evento y: this.Eventos){
-            if(y instanceof Palestra){
-                palestras[qtdPalestras]= (Palestra) y;
-                qtdPalestras++;
+        try{
+            for(Evento y: this.Eventos){
+                if(y instanceof Palestra){
+                    palestras[qtdPalestras]= (Palestra) y;
+                    qtdPalestras++;
+                }
             }
-        }
 
-        return palestras;
+            return palestras;
+        }catch (NullPointerException ex){
+            return null;
+        }
     }
 
     public String listarPalestrarToString(){
@@ -104,17 +219,21 @@ public class GerenciarEventos {
         Palestra palestras[] = new Palestra[this.getTamanhoPalestra()];
         String listagem = "";
 
-        for(Evento y: this.Eventos){
-            if(y instanceof Palestra){
+        try{
+            for(Evento y: this.Eventos){
+                if(y instanceof Palestra){
 
-                Palestra u = ((Palestra) y);
+                    Palestra u = ((Palestra) y);
 
-                listagem += "Palestrante: ["+u.getPalestrante()+"]";
-                listagem += "Publico Alvo: ["+u.getPublicoAlvo()+"]";
-                listagem += "Metodologia: ["+u.getMetodologia()+"]";
-                listagem += "Recursos: ["+u.recursosToString()+"]";
+                    listagem += "Palestrante: ["+u.getPalestrante()+"]\n";
+                    listagem += "Publico Alvo: ["+u.getPublicoAlvo()+"]\n";
+                    listagem += "Metodologia: ["+u.getMetodologia()+"]\n";
+                    listagem += "Recursos: ["+u.recursosToString()+"]\n\n";
 
+                }
             }
+        }catch (NullPointerException ex){
+            listagem = "Não tem palestra no vetor";
         }
 
         return listagem;
@@ -126,14 +245,35 @@ public class GerenciarEventos {
         Minicurso minicursos[] = new Minicurso[this.getTamanhoMinicurso()];
         int qtdPalestras = 0;
 
-        for(Evento y: this.Eventos){
-            if(y instanceof Minicurso){
-                minicursos[qtdPalestras]= (Minicurso) y;
-                qtdPalestras++;
+        try{
+            for(Evento y: this.Eventos){
+                if(y instanceof Minicurso){
+                    minicursos[qtdPalestras]= (Minicurso) y;
+                    qtdPalestras++;
+                }
             }
+
+            return minicursos;
+        }catch (NullPointerException ex){
+            return null;
+        }
+    }
+
+    protected int getTamanhoPalestra(){
+
+        int qtdTotal = 0;
+
+        try{
+            for(Evento x : this.Eventos){
+                if(x instanceof Palestra){
+                    qtdTotal++;
+                }
+            }
+        }catch (NullPointerException ex){
+            return 0;
         }
 
-        return minicursos;
+        return qtdTotal;
     }
 
     public String listarMinicursosToString(){
@@ -141,17 +281,45 @@ public class GerenciarEventos {
         Minicurso minicursos[] = new Minicurso[this.getTamanhoMinicurso()];
         String listagem = "";
 
-        for(Evento y: this.Eventos){
-            if(y instanceof Minicurso){
+        try{
+            for(Evento y: this.Eventos){
+                if(y instanceof Minicurso){
 
-                Minicurso u = ((Minicurso) y);
+                    Minicurso u = ((Minicurso) y);
 
-                listagem += "Ministrantes: ["+u.ministrantesToString()+"]";
-                listagem += "Publico Alvo: ["+u.getPublicoAlvo()+"]";
-                listagem += "Metodologia: ["+u.getMetodologia()+"]";
-                listagem += "Recursos: ["+u.recursosToString()+"]";
+                    listagem += "Ministrantes: ["+u.ministrantesToString()+"]\n";
+                    listagem += "Publico Alvo: ["+u.getPublicoAlvo()+"]\n";
+                    listagem += "Metodologia: ["+u.getMetodologia()+"]\n";
+                    listagem += "Recursos: ["+u.recursosToString()+"]\n\n";
 
+                }
             }
+        }catch (NullPointerException ex){
+            listagem = "Não tem Mini Cursos no vetor";
+        }
+
+        return listagem;
+    }
+
+    public String listarEventosToString(){
+
+        String listagem = "";
+
+        try {
+            for(Evento y: this.Eventos){
+                listagem += "Titulo: ["+y.getTitulo()+"]\n";
+                listagem += "Resumo: ["+y.getResumo()+"]\n";
+                listagem += "Recursos: ["+y.recursosToString()+"]\n";
+                if(y instanceof Palestra){
+                    listagem += "Tipo: [Palestra]\n";
+                }else if(y instanceof Minicurso){
+                    listagem += "Tipo: [Minicurso]\n";
+                }else{
+                    listagem += "Tipo: [Evento]\n";
+                }
+            }
+        }catch (NullPointerException ex){
+            listagem = "Não foi cadastrado";
         }
 
         return listagem;
@@ -159,19 +327,6 @@ public class GerenciarEventos {
 
     public Evento[] listarEventos(){
         return this.Eventos;
-    }
-
-    protected int getTamanhoPalestra(){
-
-        int qtdTotal = 0;
-
-        for(Evento x : this.Eventos){
-            if(x instanceof Palestra){
-                qtdTotal++;
-            }
-        }
-
-        return qtdTotal;
     }
 
     protected int getTamanhoMinicurso(){
@@ -185,5 +340,29 @@ public class GerenciarEventos {
         }
 
         return qtdTotal;
+    }
+
+    public Participante[] getParticipantes() {
+        return Participantes;
+    }
+
+    public void setParticipantes(Participante[] participantes) {
+        Participantes = participantes;
+    }
+
+    public Evento[] getEventos() {
+        return Eventos;
+    }
+
+    public void setEventos(Evento[] eventos) {
+        Eventos = eventos;
+    }
+
+    public Recursos[] getRecursos() {
+        return Recursos;
+    }
+
+    public void setRecursos(Recursos[] recursos) {
+        Recursos = recursos;
     }
 }

@@ -5,12 +5,23 @@ import java.util.Arrays;
 public class Alunos extends Participante{
 private String periodo;
 private Materia materias[];
-private int qtdMateria;
 
-    public Alunos(String matricula, String nome, int nivelEscolar, String curso, String periodo) {
-        super(matricula, nome, nivelEscolar, curso);
+
+    public Alunos(String matricula, String nome, int nivelEscolar, String curso, String instituicao, String periodo) {
+        super(matricula, nome, nivelEscolar, curso, instituicao);
         this.periodo = periodo;
+    }
 
+    public Alunos(String matricula, String nome, int nivelEscolar, String curso, String instituicao, String periodo, Materia[] materias) {
+        super(matricula, nome, nivelEscolar, curso, instituicao);
+        this.periodo = periodo;
+        this.materias = materias;
+    }
+
+    public Alunos(Participante participante,String periodo, Materia[] materias) {
+        super(participante.matricula, participante.nome, participante.nivelEscolar,participante.curso, participante.instituicao);
+        this.periodo = periodo;
+        this.materias = materias;
     }
 
     public String getPeriodo() {
@@ -105,7 +116,6 @@ private int qtdMateria;
         return "Alunos{" +
                 "periodo='" + periodo + '\'' +
                 ", materias=" + Arrays.toString(materias) +
-                ", qtdMateria=" + qtdMateria +
                 ", matricula='" + matricula + '\'' +
                 ", nome='" + nome + '\'' +
                 ", nivelEscolar=" + nivelEscolar +

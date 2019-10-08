@@ -16,6 +16,19 @@ public class Palestra extends Evento{
         this.metodologia = metodologia;
     }
 
+    public Palestra(Evento evento,Participante palestrante, String publicoAlvo, String metodologia) {
+        super(evento.titulo, evento.resumo, evento.qtdMaximaDeParticipnates,evento.local,evento.horario,evento.duracao);
+        this.palestrante = palestrante;
+        this.publicoAlvo = publicoAlvo;
+        this.metodologia = metodologia;
+    }
+
+    public Palestra(Evento evento, String publicoAlvo, String metodologia) {
+        super(evento.titulo, evento.resumo, evento.qtdMaximaDeParticipnates,evento.local,evento.horario,evento.duracao);
+        this.publicoAlvo = publicoAlvo;
+        this.metodologia = metodologia;
+    }
+
     public Participante getPalestrante() {
         return palestrante;
     }

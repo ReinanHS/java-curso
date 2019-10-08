@@ -45,6 +45,8 @@ public class Recursos {
         this.quantitativo = quantitativo;
     }
 
+
+
     @Override
     public String toString() {
         return "Recursos{" +
@@ -53,5 +55,14 @@ public class Recursos {
                 ", descricao='" + descricao + '\'' +
                 ", quantitativo=" + quantitativo +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Recursos){
+            return (((Recursos) obj).getCodigo() == this.getCodigo());
+        }
+
+        return false;
     }
 }
