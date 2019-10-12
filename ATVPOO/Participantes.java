@@ -1,13 +1,13 @@
-package br.semanaAcademica;
+package CadastroEventos;
 
-public class Participante {
+public class Participantes {
     protected String matricula;
     protected String nome;
     protected int nivelEscolar;
     protected String curso;
     protected String instituicao;
 
-    public Participante(String matricula, String nome, int nivelEscolar, String curso, String instituicao) {
+    public Participantes(String matricula, String nome, int nivelEscolar, String curso, String instituicao) {
         this.matricula = matricula;
         this.nome = nome;
         this.nivelEscolar = nivelEscolar;
@@ -68,11 +68,11 @@ public class Participante {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Participante){
+        if(obj instanceof Participantes){
 
-            Participante obgNovo = (Participante) obj;
+            Participantes obgNovo = (Participantes) obj;
 
-            if(obgNovo.matricula.equals(this.matricula) && obgNovo.nome.equals(this.nome)){
+            if(obgNovo.matricula.equals(this.matricula) == true){
                 return true;
             }else{
                 return false;

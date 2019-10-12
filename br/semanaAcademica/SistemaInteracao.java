@@ -34,6 +34,44 @@ public class SistemaInteracao {
         }
     }
 
+    public static int getMenuOpicao(String mgs){
+
+        String valor = "";
+
+        if(UI_TIPO.equals(Scanner.class)){
+            System.out.print(mgs);
+
+            valor = input.next();
+
+        }else{
+            valor = JOptionPane.showInputDialog(mgs);
+        }
+
+        if(valor.equals("1")){
+            return 1;
+        }else if(valor.equals("2")){
+            return 2;
+        }else if(valor.equals("3")){
+            return 3;
+        }else if(valor.equals("4")){
+            return 4;
+        }else if(valor.equals("5")){
+            return 5;
+        }else if(valor.equals("6")){
+            return 6;
+        }else if(valor.equals("7")){
+            return 7;
+        }else if(valor.equals("8")){
+            return 8;
+        }else if(valor.equals("9")){
+            return 9;
+        }else if(valor.equals("10")){
+            return 10;
+        }else {
+            return -1;
+        }
+    }
+
     public static double getDoubleUI(String mgs){
         if(UI_TIPO.equals(Scanner.class)){
             System.out.print(mgs);
@@ -77,14 +115,15 @@ public class SistemaInteracao {
 
     public static Participante criarParticipante(){
 
-        String matricula = getUI("Digite o sua matricula aqui: ");
+        //String matricula = getUI("Digite o sua matricula aqui: ");
+        String matricula = "2019"+random.nextInt(100)+""+random.nextInt(100);
         String nome = getUI("Digite o seu nome aqui: ");
 
         int nivelEscolar = 0;
 
         do{
             nivelEscolar = getIntUI("Digite aqui o seu Ninel Escolar\n[01] - Fundamental\n[02] - Médio\n[03] - Superior\n\n");
-        }while (nivelEscolar < 1 && nivelEscolar > 3);
+        }while (nivelEscolar < 1 || nivelEscolar > 3);
 
         String curso = getUI("Digite o seu curso aqui: ");
         String instituicao = getUI("Digite o sua instituição aqui: ");

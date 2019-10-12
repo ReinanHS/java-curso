@@ -16,8 +16,8 @@ public class Main {
         int tipo = 0;
 
         do{
-            tipo = SistemaInteracao.getIntUI("Digite o tipo de interface que você quer: \n\n[01] - CMD\n[02] - Interface grafica\n\n");
-        }while (tipo < 0 && tipo > 2);
+            tipo = SistemaInteracao.getMenuOpicao("Digite o tipo de interface que você quer: \n\n[01] - CMD\n[02] - Interface grafica\n\n");
+        }while (tipo < 0 || tipo > 2);
 
         switch (tipo){
             case 2: {
@@ -39,8 +39,12 @@ public class Main {
         int flag = 0;
 
         do{
-            flag = SistemaInteracao.getIntUI(mgs);
-        }while (flag < 1 && flag >= 4);
+            flag = 0;
+            flag = SistemaInteracao.getMenuOpicao(mgs);
+            System.out.println(flag);
+
+
+        }while (flag < 1 || flag > 4);
 
         switch (flag){
             case 1: {
@@ -56,6 +60,7 @@ public class Main {
                 break;
             }
         }
+
     }
 
     public static void menuParticipante(){
@@ -70,8 +75,8 @@ public class Main {
         int flag = 0;
 
         do{
-            flag = SistemaInteracao.getIntUI(mgs);
-        }while (flag < 1 && flag >= 6);
+            flag = SistemaInteracao.getMenuOpicao(mgs);
+        }while (flag < 1 || flag >= 6);
 
         switch (flag){
             case 1: {
@@ -136,8 +141,8 @@ public class Main {
         int flag = 0;
 
         do{
-            flag = SistemaInteracao.getIntUI(mgs);
-        }while (flag < 1 && flag >= 7);
+            flag = SistemaInteracao.getMenuOpicao(mgs);
+        }while (flag < 1 || flag >= 7);
 
         switch (flag){
             case 1: {
@@ -263,14 +268,14 @@ public class Main {
         String mgs = "";
         mgs += "[01] - Recursos  Listar\n";
         mgs += "[02] - Cadastrar Recursos\n";
-        mgs += "[03] - Remover um Evento\n";
+        mgs += "[03] - Remover um Recurso\n";
         mgs += "[04] - Voltar\n";
 
         int flag = 0;
 
         do{
-            flag = SistemaInteracao.getIntUI(mgs);
-        }while (flag < 1 && flag > 4);
+            flag = SistemaInteracao.getMenuOpicao(mgs);
+        }while (flag < 1 || flag > 4);
 
         switch (flag){
             case 1: {

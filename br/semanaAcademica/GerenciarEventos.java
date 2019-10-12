@@ -15,7 +15,9 @@ public class GerenciarEventos {
             Participante participantes[] = new Participante[this.Participantes.length+1];
 
             for (int i = 0; i < this.Participantes.length; i++) {
-                participantes[i] = this.Participantes[i];
+                if(!this.Participantes[i].equals(participante)){
+                    participantes[i] = this.Participantes[i];
+                }else return false;
             }
 
             participantes[this.Participantes.length] = participante;
@@ -66,6 +68,7 @@ public class GerenciarEventos {
 
         try{
             for(Participante y: this.Participantes){
+                listagem += "Matricula: ["+y.getMatricula()+"]\n";
                 listagem += "Nome: ["+y.getNome()+"]\n";
                 listagem += "Curso: ["+y.getCurso()+"]\n";
                 listagem += "Instituição: ["+y.getInstituicao()+"]\n\n";
