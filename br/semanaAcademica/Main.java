@@ -39,11 +39,7 @@ public class Main {
         int flag = 0;
 
         do{
-            flag = 0;
             flag = SistemaInteracao.getMenuOpicao(mgs);
-            System.out.println(flag);
-
-
         }while (flag < 1 || flag > 4);
 
         switch (flag){
