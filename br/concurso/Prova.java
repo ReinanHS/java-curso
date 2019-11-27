@@ -57,7 +57,7 @@ public class Prova {
         if (this == o) return true;
         else if ( o instanceof Prova ){
             Prova prova = (Prova) o;
-            return this.capacidade == prova.capacidade;
+            return this.capacidade == prova.capacidade && Arrays.deepEquals(this.iQuestaos, prova.iQuestaos);
         }
         return false;
     }

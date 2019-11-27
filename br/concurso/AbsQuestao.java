@@ -1,6 +1,7 @@
 package br.concurso;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 // Classe abstrata que representa uma questão e implementa a interface IQuestao.
 public abstract class AbsQuestao<G> implements IQuestao<G> {
@@ -101,5 +102,27 @@ public abstract class AbsQuestao<G> implements IQuestao<G> {
                 ", complexidade=" + complexidade +
                 ", alternativas=" + Arrays.toString(alternativas) +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        else if (o instanceof AbsQuestao) {
+            AbsQuestao<G> that = (AbsQuestao<G>) o;
+            return this.totalAlternativas == that.totalAlternativas &&
+                    this.enunciado.equals(that.enunciado) &&
+                    this.assunto.equals(that.assunto) &&
+                    this.complexidade.equals(that.complexidade) &&
+                    Arrays.equals(alternativas, that.alternativas);
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(enunciado, totalAlternativas, assunto, complexidade);
+        result = 31 * result + Arrays.hashCode(alternativas);
+        return result;
     }
 }

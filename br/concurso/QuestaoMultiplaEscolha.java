@@ -33,4 +33,6 @@ public class QuestaoMultiplaEscolha extends AbsQuestao<Character> {
 
         return null;
     }
+
+
 }

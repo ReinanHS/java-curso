@@ -35,6 +35,8 @@ public class Teste {
             alternativas[2].setCorreta(true);
         }
 
+        Assunto matematica = new Assunto(id,"Matematica");
+        Complexidade facil = new Complexidade(id, "Facil");
         questao.setAlternativas(alternativas);
         //System.out.println(questao);
         return questao;
@@ -83,43 +85,87 @@ public class Teste {
         return enunciadoEsperado.equals(enunciadoObtido) && (gabaritoEsperado == gabaritoObtido);
     }
 
+    public static void imprimirProva() {
+        System.out.println("\n\n:::::: Prova ::::::");
+        IQuestao[] questoes = prova.getQuestoes();
+        for (int i = 0; i < questoes.length; i++) {
+            System.out.println("\n:: Questão: " + questoes[i].getEnunciado()+" ::");
+            System.out.println("Assunto: " + questoes[i].getAssunto());
+            System.out.println("Complexidade: " + questoes[i].getAssunto());
+            System.out.println("Alternativas: ");
+            Alternativa[] alternativas = questoes[i].getAlternativas();
+            for (int j = 0; j < alternativas.length; j++)
+                System.out.println(alternativas[j].getDescricao());
+            Object gabarito = questoes[i].getGabarito();
+            if (i == 0)
+                System.out.println("Gabarito: " + Arrays.toString((boolean[]) gabarito));
+            else
+                System.out.println("Gabarito: " + gabarito);
+        }
+    }
+
     public static void main(String[] args) {
         prova = new Prova(MAX_QUESTOES);
 
-        //System.out.println(criarQuestao(1, MAX_ALTERNATIVAS, "VF"));
+        Alternativa[] alternativas = new Alternativa[MAX_ALTERNATIVAS];
+        for (int i = 0; i < MAX_ALTERNATIVAS; i++)
+            alternativas[i] = new Alternativa("alternativa " +(i+1), false);
+        questao = new QuestaoVF("Enunciado", 4);
+        questao.setEnunciado("Enunciado 1");
+        alternativas[2].setCorreta(true);
+        alternativas[4].setCorreta(true);
+
+        Assunto matematica = new Assunto(1,"Matematica");
+        Complexidade facil = new Complexidade(1, "Facil");
+        questao.setAlternativas(alternativas);
+        questao.setAssunto(matematica);
+        questao.setComplexidade(facil);
+
+        Prova novaProva = new Prova(3);
 
         try {
-            criarQuestaoVF(1);
+            prova.addQuestao(questao);
+            novaProva.addQuestao(questao);
         } catch (LimiteExcedidoException e) {
             e.printStackTrace();
         }
 
+        System.out.println(prova.equals(questao));
+
+//        try {
+//            criarQuestaoVF(1);
+//        } catch (LimiteExcedidoException e) {
+//            e.printStackTrace();
+//        }
+//
 //        try {
 //            criarQuestaoS(2);
 //        } catch (LimiteExcedidoException e) {
 //            e.printStackTrace();
 //        }
-
+//
 //        try {
 //            criarQuestaoME(3);
 //        } catch (LimiteExcedidoException e) {
 //            e.printStackTrace();
 //        }
-
-        //System.out.println(prova);
+//
+//        System.out.println(prova);
 //        try {
 //            prova.getQuestoes()[0].addAlternativa(new Alternativa("alternativa acima", false));
 //        } catch (LimiteExcedidoException e) {
 //            e.printStackTrace();
 //            //e.getMessage();
 //        }
-
-
+//
+//
 //        try {
 //            prova.getQuestoes()[0].addAlternativa(new Alternativa("alternativa acima", false));
 //        } catch (LimiteExcedidoException e) {
 //            System.out.println("(2,0 pontos) Adicionar alternativa acima do limite da questão = " + (e.getMessage().equals("Limite do repositório foi excedido.")?"acertou":"errou"));
 //        }
+
+        //imprimirProva();
 
     }
 }
