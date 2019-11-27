@@ -109,10 +109,17 @@ public abstract class AbsQuestao<G> implements IQuestao<G> {
         if (this == o) return true;
         else if (o instanceof AbsQuestao) {
             AbsQuestao<G> that = (AbsQuestao<G>) o;
+
+            if(this.assunto != null && this.complexidade != null ){
+                return this.totalAlternativas == that.totalAlternativas &&
+                        this.enunciado.equals(that.enunciado) &&
+                        this.assunto.equals(that.assunto) &&
+                        this.complexidade.equals(that.complexidade) &&
+                        Arrays.equals(alternativas, that.alternativas);
+            }
+
             return this.totalAlternativas == that.totalAlternativas &&
                     this.enunciado.equals(that.enunciado) &&
-                    this.assunto.equals(that.assunto) &&
-                    this.complexidade.equals(that.complexidade) &&
                     Arrays.equals(alternativas, that.alternativas);
         }
 

@@ -46,4 +46,14 @@ public class QuestaoSomatorio extends AbsQuestao<Integer>{
             return 0;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        else if (o instanceof QuestaoSomatorio) {
+            return super.equals(o);
+        }
+
+        return false;
+    }
 }

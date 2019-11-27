@@ -28,4 +28,14 @@ public class QuestaoVF extends AbsQuestao<boolean[]> {
             return new boolean[0];
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        else if (o instanceof QuestaoVF) {
+            return super.equals(o);
+        }
+
+        return false;
+    }
 }
